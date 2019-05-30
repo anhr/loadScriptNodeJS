@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>loadScript</title>
+    <meta name="author" content="Andrej Hristoliubov https://anhr.github.io/AboutMe/">
+    <script src="build/loadScript.js"></script>
+</head>
+<body>
+    <p><a href='https://anhr.github.io/index.html' target="_blank">Home</a> | <a href='https://github.com/anhr/loadScriptNodeJS' target="_blank">GitHub</a></p>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Рекламный блок -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-2575715742658777"
+         data-ad-slot="8810450588"></ins>
+    <script>
+        ( adsbygoogle = window.adsbygoogle || [] ).push( {} );
+    </script>
+
+    <h1>node.js version of the loadScript.</h1>
+    <script type="text/javascript">
+        loadScript.src( [
+				"JavaScript1.js",
+				"../examples/js/lines/LineGeometry.js",
+				"../examples/js/lines/LineMaterial.js",
+				"../examples/js/lines/LineSegments2.js",
+				"../examples/js/lines/Line2.js",
+		] ).async( {
+
+			onload: function () {
+
+				onLoad();
+
+			}
+
+		} );
+
+    </script>
+</body>
+</html>

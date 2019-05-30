@@ -1,0 +1,8 @@
+Building loadScript
+
+Открыть "Node.js command prompt"
+
+d:
+cd "D:\WebFeatures\GoogleSite\nodejs\loadScriptNodeJS"
+npm install
+npm run build
