@@ -2,42 +2,160 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <title>loadScript</title>
-    <meta name="author" content="Andrej Hristoliubov https://anhr.github.io/AboutMe/">
-    <script src="build/loadScript.js"></script>
+	<meta charset="utf-8" />
+	<title>loadScript</title>
+	<meta name="author" content="Andrej Hristoliubov https://anhr.github.io/AboutMe/">
+	<script src="build/loadScript.js"></script>
+	<script>
+
+		function escapeHtml(str) {
+
+			return str.replace( /[&<>"'\/]/g, function ( s ) {
+
+				var entityMap = {
+
+					"&": "&amp;",
+					"<": "&lt;",
+					">": "&gt;",
+					'"': '&quot;',
+					"'": '&#39;',
+					"/": '&#x2F;'
+
+				};
+
+				return entityMap[s];
+
+			});
+		}
+
+	</script>
 </head>
 <body>
-    <p><a href='https://anhr.github.io/index.html' target="_blank">Home</a> | <a href='https://github.com/anhr/loadScriptNodeJS' target="_blank">GitHub</a></p>
+	<p><a href='https://anhr.github.io/index.html' target="_blank">Home</a> | <a href='https://github.com/anhr/loadScriptNodeJS' target="_blank">GitHub</a></p>
+	<!--
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	-->
+	<!-- Рекламный блок -->
+	<!--
+	<ins class="adsbygoogle"
+		 style="display:inline-block;width:728px;height:90px"
+		 data-ad-client="ca-pub-2575715742658777"
+		 data-ad-slot="8810450588"></ins>
+	<script>
+		( adsbygoogle = window.adsbygoogle || [] ).push( {} );
+	</script>
+	-->
+	<h1>node.js version of the load JavaScript file.</h1>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Рекламный блок -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:728px;height:90px"
-         data-ad-client="ca-pub-2575715742658777"
-         data-ad-slot="8810450588"></ins>
-    <script>
-        ( adsbygoogle = window.adsbygoogle || [] ).push( {} );
-    </script>
+	<p>
+		<div>Result of testing of async loading of JavaScript.js file: <span id="asyncres"></span></div>
+	</p>
+	<script type="text/javascript">
+		const elAsyncRes = document.getElementById( "asyncres" );
+		loadScript.async( "JavaScript.js",
+			{
+				onload: function () {
 
-    <h1>node.js version of the loadScript.</h1>
-    <script type="text/javascript">
-        loadScript.src( [
-				"JavaScript1.js",
-				"../examples/js/lines/LineGeometry.js",
-				"../examples/js/lines/LineMaterial.js",
-				"../examples/js/lines/LineSegments2.js",
-				"../examples/js/lines/Line2.js",
-		] ).async( {
+					var str = 'file has been loaded successfully';
+					console.log( str );
+					elAsyncRes.innerHTML = str;
 
+				},
+				onerror: function ( str, e ) {
+
+					console.error( str );
+					elAsyncRes.style.color = 'red';
+					elAsyncRes.innerHTML = str;
+
+				},
+
+			} );
+
+	</script>
+
+	<p>
+		<div>Async loading of JavaScript.js file again: <span id="asyncagainres"></span></div>
+	</p>
+	<script type="text/javascript">
+		const elAsyncAgainRes = document.getElementById( "asyncagainres" );
+		loadScript.async( "JavaScript.js",
+			{
+				onload: function () {
+
+					var str = 'file has been loaded successfully';
+					console.log( str );
+					elAsyncAgainRes.innerHTML = str;
+
+				},
+				onerror: function ( str, e ) {
+
+					console.error( str );
+					elAsyncAgainRes.style.color = 'red';
+					elAsyncAgainRes.innerHTML = str;
+
+				},
+
+			} );
+
+	</script>
+
+	<p>
+		<div>Result of testing of async loading of the appendTo.js file to specified node: <span id="asyncappendtores"></span></div>
+		<div id="appendto"></div>
+		<div id="appendtoinner"></div>
+	</p>
+	<script type="text/javascript">
+		const elAsyncAppendToRes = document.getElementById( "asyncappendtores" ),
+			elAppendTo = document.getElementById( "appendto" );
+		loadScript.async( "appendTo.js",
+			{
+				onload: function () {
+
+					var str = 'file has been loaded successfully';
+					console.log( str );
+					elAsyncAppendToRes.innerHTML = str;
+					document.getElementById( "appendtoinner" ).innerHTML = "Node content: '" + escapeHtml( elAppendTo.innerHTML ) + "'";
+
+				},
+				onerror: function ( str, e ) {
+
+					console.error( str );
+					elAsyncAppendToRes.style.color = 'red';
+					elAsyncAppendToRes.innerHTML = str;
+
+				},
+				appendTo: elAppendTo,
+
+			} );
+
+	</script>
+
+	<p>
+		<div>Result of testing of async loading of array of JavaScript1.js and JavaScript2.js files: <span id="asyncarrayres"></span></div>
+	</p>
+	<script type="text/javascript">
+		const elAsyncArrayRes = document.getElementById( "asyncarrayres" );
+		loadScript.async( [
+			"JavaScript1.js",
+			"JavaScript2.js",
+		],
+		{
 			onload: function () {
 
-				onLoad();
+				var str = 'files has been loaded successfully';
+				console.log( str );
+				elAsyncArrayRes.innerHTML = str;
 
-			}
+			},
+			onerror: function ( str, e ) {
+
+				console.error( str );
+				elAsyncArrayRes.style.color = 'red';
+				elAsyncArrayRes.innerHTML = str;
+
+			},
 
 		} );
-
-    </script>
+	</script>
 </body>
 </html>

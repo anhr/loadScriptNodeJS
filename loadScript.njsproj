@@ -29,9 +29,18 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="appendTo.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="index.html" />
     <Content Include="index.js" />
+    <Content Include="JavaScript.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="JavaScript1.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="JavaScript2.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="licenseBanner.txt" />

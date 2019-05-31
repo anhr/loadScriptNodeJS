@@ -1,7 +1,7 @@
 {
   "name": "loadScript",
   "version": "0.1.0",
-  "description": "node.js version of the loadScript",
+  "description": "node.js version of the load JavaScript file",
   "main": "build/loadScript.js",
   "scripts": {
     "build": "rollup -c"

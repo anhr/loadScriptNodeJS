@@ -1,6 +1,9 @@
+test page
+https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html
+--------------------------------
 Building loadScript
 
-Открыть "Node.js command prompt"
+Open "Node.js command prompt"
 
 d:
 cd "D:\WebFeatures\GoogleSite\nodejs\loadScriptNodeJS"
