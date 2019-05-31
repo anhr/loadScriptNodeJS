@@ -1,8 +1,9 @@
 ﻿# loadScript
-node.js version of the loadScript
-load JavaScript file
-http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html
-https://learn.javascript.ru/onload-onerror
+The loadScript is node.js version of the load JavaScript file.
+
+Thanks to: [http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html](http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html)
+
+and [https://learn.javascript.ru/onload-onerror](https://learn.javascript.ru/onload-onerror)
 
 
 ## Packaged Builds
