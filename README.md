@@ -15,12 +15,42 @@ In your `head` tag, include the following code:
 <script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.js"></script>
 ```
 
-Now you can use loadScript for loading of your JavaScript file.
+Now you can use loadScript for loading of your JavaScript files.
 
-## Append simple tree 
+## async( src, [options] )
 
+Asynchronous load JavaScript file.
+
+src: URL of an external script file or array of the script file names.
+[options]: followed options is available
+	onload: function () The onload event occurs when a script has been loaded.
+	onerror: function ( str, e ) The onerror event occurs when an error has been occured.
+		str: error details
+		e: event
+	appendTo: The node to which the new script will be append. Default is head
+
+### Example
 ```
-	element
+	//Asynchronous load JavaScript file
+	loadScript.async( "JavaScript1.js" );
+```
+```
+	//Asynchronous load JavaScript file with events
+    loadScript.async( "JavaScript1.js",
+    {
+        onload: function () {
+
+            var str = 'files has been loaded successfully';
+            console.log( str );
+
+        },
+        onerror: function ( str, e ) {
+
+            console.error( str );
+
+        },
+
+    } );
 ```
 
 ## Directory Contents
