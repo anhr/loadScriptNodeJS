@@ -29,10 +29,10 @@ src: URL of an external script file or array of the script file names.
 		e: event
 	appendTo: The node to which the new script will be append. Default is head
 
-### Example
+### Examples
 ```
-	//Asynchronous load JavaScript file
-	loadScript.async( "JavaScript.js" );
+//Asynchronous load JavaScript file
+loadScript.async( "JavaScript.js" );
 ```
 ```
 //Asynchronous load JavaScript file with events to specified node
