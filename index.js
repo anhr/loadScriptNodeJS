@@ -30,8 +30,8 @@ function loadScriptBase( callback, appendTo ) {
 //@param src: URL of an external script file or array of the script file names.
 //@param options: followed options is available
 //{
-//	onload: function () The onload event occurs when a script has been loaded. Default is undefined
-//	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined
+//	onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+//	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
 //		str: error details
 //		e: event
 //	appendTo: The node to which the new script will be append. Default is head node
