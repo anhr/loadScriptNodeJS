@@ -35,52 +35,52 @@ src: URL of an external script file or array of the script file names.
 	loadScript.async( "JavaScript.js" );
 ```
 ```
-	//Asynchronous load JavaScript file with events to specified node
-    loadScript.async( "JavaScript.js",
-		{
+//Asynchronous load JavaScript file with events to specified node
+loadScript.async( "JavaScript.js",
+	{
 
-			onload: function () {
+		onload: function () {
 
-				var str = 'files has been loaded successfully';
-				console.log( str );
+			var str = 'files has been loaded successfully';
+			console.log( str );
 
-			},
-			onerror: function ( str, e ) {
+		},
+		onerror: function ( str, e ) {
 
-				console.error( str );
+			console.error( str );
 
-			},
-			appendTo: document.getElementById( "appendto" ),
+		},
+		appendTo: document.getElementById( "appendto" ),
 
-		}
+	}
 	
-	);
+);
 ```
 ```
-	//Asynchronous load of array of JavaScript files
-    loadScript.async( [
+//Asynchronous load of array of JavaScript files
+loadScript.async( [
 
-			"JavaScript1.js",
-			"JavaScript2.js",
+		"JavaScript1.js",
+		"JavaScript2.js",
 
-		],
-		{
+	],
+	{
 
-			onload: function () {
+		onload: function () {
 
-				var str = 'files has been loaded successfully';
-				console.log( str );
+			var str = 'files has been loaded successfully';
+			console.log( str );
 
-			},
-			onerror: function ( str, e ) {
+		},
+		onerror: function ( str, e ) {
 
-				console.error( str );
+			console.error( str );
 
-			},
+		},
 
-		}
+	}
 	
-	);
+);
 ```
 
 ## Directory Contents
