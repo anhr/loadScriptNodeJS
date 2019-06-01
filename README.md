@@ -25,15 +25,15 @@ src: URL of an external script file or array of the script file names.
 
 [options]: followed options is available
 
-	onload: function () The onload event occurs when a script has been loaded.
+    onload: function () The onload event occurs when a script has been loaded.
 
-	onerror: function ( str, e ) The onerror event occurs when an error has been occured.
+    onerror: function ( str, e ) The onerror event occurs when an error has been occured.
 
-		str: error details
+        str: error details
 
-		e: event
+        e: event
 
-	appendTo: The node to which the new script will be append. Default is head
+    appendTo: The node to which the new script will be append. Default is head
 
 ### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
