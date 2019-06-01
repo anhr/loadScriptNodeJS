@@ -8,7 +8,7 @@ and [https://learn.javascript.ru/onload-onerror](https://learn.javascript.ru/onl
 
 ## Packaged Builds
 The easiest way to use loadScript in your code is by using the built source at `build/loadScript.js`.
-These built JavaScript files bundle all the necessary dependencies to run TreeElement.
+These built JavaScript files bundle all the necessary dependencies to run loadScript.
 
 In your `head` tag, include the following code:
 ```html
@@ -29,7 +29,7 @@ src: URL of an external script file or array of the script file names.
 		e: event
 	appendTo: The node to which the new script will be append. Default is head
 
-### Examples
+### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
 //Asynchronous load JavaScript file
 loadScript.async( "JavaScript.js" );

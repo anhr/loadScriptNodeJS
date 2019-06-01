@@ -1,5 +1,5 @@
 /**
- * node.js version of the TreeElement
+ * node.js version of the load JavaScript file
  *
  * Copyright 2011 Data Arts Team, Google Creative Lab
  *
