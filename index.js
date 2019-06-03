@@ -14,71 +14,128 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  */
 
-function loadScriptBase( callback, appendTo ) {
+//Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
+import { sync as loadFileSync } from '../loadFileNodeJS/index.js';
 
-	var script = document.createElement( 'script' );
-	script.setAttribute( "type", 'text/javascript' );
-	callback( script );
-	appendTo.appendChild( script );
+//
+//@param src: URL of an external script file or array of the script file names.
+/**
+ * Synchronous load JavaScript file
+ * @param {string} src URL of an external script file or array of the script file names.
+ * @param {object} options followed options is available. Default is undefined
+ * {
+ *	onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+ *	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+ *		str: error details
+ *		e: event
+ *	appendTo: The node to which the new script will be append. Default is head node
+ * }
+ * @example
+	//Simplest example. Append script into head node.
+	loadScript.sync( 'sync.js' );
+ 
+	//onload, onerror events. Append script into "appendto" element
+	loadScript.sync( 'sync.js',
+		{
+			onload: function ( response ) {
+
+				var str = 'file has been loaded successfully';
+				console.log( str );
+				elSync2Res.innerHTML = escapeHtml( response );
+
+			},
+			onerror: function ( str ) {
+
+				elSync2Res.style.color = 'red';
+				elSync2Res.innerHTML = str;
+
+			},
+			appendTo: document.getElementById( "appendto" ),
+		},
+	);
+
+ */
+function sync( src, options ) {
+
+	options = options || {};
+	options.onload = options.onload || function () { };
+	options.onerror = options.onerror || function () { };
+	options.appendTo = options.appendTo || document.getElementsByTagName( 'head' )[0];
+
+	if ( isScriptExists( options.appendTo, src ) ) {
+
+		options.onerror( 'duplicate downloading of the ' + src + ' file' );
+		return;
+
+	}
+
+	loadScriptBase( function ( script ) {
+
+		script.setAttribute( "id", src );
+		script.innerHTML = loadFileSync( src, options );
+
+	}, options.appendTo );
 
 }
 
-//Synchronous load JavaScript file
-//this.sync = function () { loadScriptBase( function ( script ) { script.innerHTML = getSynchronousResponse( src ); } ); }
-
-//Asynchronous load JavaScript file
-//@param src: URL of an external script file or array of the script file names.
-//@param options: followed options is available
-//{
-//	onload: function () The onload event occurs when a script has been loaded. Default is undefined.
-//	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
-//		str: error details
-//		e: event
-//	appendTo: The node to which the new script will be append. Default is head node
-//}
-//
-//@example
-//loadScript.async( "JavaScript.js",
-//	{
-//		onload: function () {
-//
-//			var str = 'file has been loaded successfully';
-//			console.log( str );
-//
-//		},
-//		onerror: function ( str, e ) {
-//
-//			console.error( str );
-//
-//		},
-//		appendTo: document.getElementById( "appendto" ),
-//
-//	}
-//
-//);
-//
-//loadScript.async( [
-//		"JavaScript1.js",
-//		"JavaScript2.js",
-//	],
-//	{
-//		onload: function () {
-//
-//			var str = 'file has been loaded successfully';
-//			console.log( str );
-//
-//		},
-//		onerror: function ( str, e ) {
-//
-//			console.error( str );
-//
-//		},
-//
-//	}
-//
-//);
-
-
+/**
+ * Asynchronous load JavaScript file
+ * @param {string} src URL of an external script file or array of the script file names.
+ * @param {object} options followed options is available. Default is undefined
+ * {
+ *	onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+ *	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+ *		str: error details
+ *		e: event
+ *	appendTo: The node to which the new script will be append. Default is head node
+ * }
+ * @example
+ * 
+ * //Simplest example. Append script into head node.
+ * loadScript.async( "JavaScript.js);
+ * 
+ * //onload, onerror events. Append script into "appendto" element
+ * loadScript.async( "JavaScript.js",
+ *	{
+ *		onload: function () {
+ *
+ *			var str = 'file has been loaded successfully';
+ *			console.log( str );
+ *
+ *		},
+ *		onerror: function ( str, e ) {
+ *
+ *			console.error( str );
+ *
+ *		},
+ *		appendTo: document.getElementById( "appendto" ),
+ *
+ *	}
+ *
+ * );
+ *
+ * //loading of array of JavaScript files. Append script into head node.
+ * loadScript.async( [
+ *		"JavaScript1.js",
+ *		"JavaScript2.js",
+ *	],
+ *	{
+ *		onload: function () {
+ *
+ *			var str = 'file has been loaded successfully';
+ *			console.log( str );
+ *
+ *		},
+ *		onerror: function ( str, e ) {
+ *
+ *			console.error( str );
+ *
+ *		},
+ *
+ *	}
+ *
+ * );
+ */
 function async( src, options ) {
 
 	options = options || {};
@@ -89,23 +146,9 @@ function async( src, options ) {
 
 	function async( srcAsync ) {
 
-		var scripts = options.appendTo.querySelectorAll( 'script' );
-		for ( var i in scripts ) {
+		if ( isScriptExists( options.appendTo, srcAsync, options.onload ) )
+			return;
 
-			var child = scripts[ i ];
-			if ( child.id == srcAsync ) {
-
-				if ( options.onload !== undefined ) {
-
-					//setTimeout( function () { onload() }, 100 );//���� �� ������� ��� ��������, �� ��� �������� ��������� ��� ������ ������ �� �������� ����������� app.js � ���������� ������ addMedia.js:6 Uncaught ReferenceError: App is not defined
-					options.onload();
-
-				}
-				return;
-
-			}
-
-		}
 		loadScriptBase( function ( script ) {
 
 			script.setAttribute( "id", srcAsync );
@@ -158,7 +201,7 @@ function async( src, options ) {
 					var str = 'loadScript: "' + this.src + '" failed';
 					if ( options.onerror !== undefined )
 						options.onerror( str, e );
-					else console.error( str );
+					console.error( str );
 
 				};
 
@@ -179,4 +222,32 @@ function async( src, options ) {
 
 }
 
-export { async };
+function loadScriptBase( callback, appendTo ) {
+
+	var script = document.createElement( 'script' );
+	script.setAttribute( "type", 'text/javascript' );
+	callback( script );
+	appendTo.appendChild( script );
+
+}
+
+function isScriptExists( elParent, srcAsync, onload ) {
+
+	var scripts = elParent.querySelectorAll( 'script' );
+	for ( var i = 0; i < scripts.length; i++ ) {
+
+		var child = scripts[i];
+		if ( child.id == srcAsync ) {
+
+			if ( onload !== undefined )
+				onload();
+			return true;
+
+		}
+
+	}
+	return false;
+
+}
+
+export { async, sync };

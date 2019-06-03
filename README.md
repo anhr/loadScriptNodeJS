@@ -15,15 +15,15 @@ In your `head` tag, include the following code:
 <script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.js"></script>
 ```
 
-Now you can use loadScript for loading of your JavaScript files.
+Now you can use window.loadScript for loading of your JavaScript files.
 
-## async( src, [options] )
+### loadScript.async( src, [options] )
 
 Asynchronous load JavaScript file.
 
 src: URL of an external script file or array of the script file names.
 
-[options]: followed options is available
+options: followed options is available
 
     onload: function () The onload event occurs when a script has been loaded. Default is undefined.
 

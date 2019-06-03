@@ -49,6 +49,12 @@
     <Content Include="README.md" />
     <Content Include="rollup.config.js" />
     <Content Include="rollup.config.min.js" />
+    <Content Include="sync.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="sync2.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="URL.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
