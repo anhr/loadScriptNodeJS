@@ -1,11 +1,6 @@
 ﻿# loadScript
 The loadScript is node.js version of the load JavaScript file. [Example](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 
-Thanks to: [http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html](http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html)
-
-and [https://learn.javascript.ru/onload-onerror](https://learn.javascript.ru/onload-onerror)
-
-
 ## Packaged Builds
 The easiest way to use loadScript in your code is by using the built source at `build/loadScript.js`.
 These built JavaScript files bundle all the necessary dependencies to run loadScript.
@@ -99,7 +94,7 @@ loadScript.async( [
 └── build - Compiled source code.
 ```
 
-## Building your own customController
+## Building your own loadScript
 
 In the terminal, enter the following:
 
@@ -113,7 +108,12 @@ $ npm run build
 - npm run build - Build development and production version of scripts.
 
 ## Thanks
-The following libraries / open-source projects were used in the development of customController:
+
+[Как определить успешно ли подгружен файл (например - что будет если такого файла нет)?](http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html)
+
+[Загрузка скриптов, картинок, фреймов: onload и onerror](https://learn.javascript.ru/onload-onerror)
+
+The following libraries / open-source projects were used in the development of loadScript:
  * [Rollup](https://rollupjs.org)
  * [Node.js](http://nodejs.org/)
 
