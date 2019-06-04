@@ -15,21 +15,20 @@
  */
 
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
-import { sync as loadFileSync } from '../loadFileNodeJS/index.js';
+import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
+/**
+ * @callback onerror
+ * @param {string} str - error details
+ * @param {Object} e - event
+ */
 
-//
-//@param src: URL of an external script file or array of the script file names.
 /**
  * Synchronous load JavaScript file
- * @param {string} src URL of an external script file or array of the script file names.
- * @param {object} options followed options is available. Default is undefined
- * {
- *	onload: function () The onload event occurs when a script has been loaded. Default is undefined.
- *	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
- *		str: error details
- *		e: event
- *	appendTo: The node to which the new script will be append. Default is head node
- * }
+ * @param {string} src URL of an external script file.
+ * @param {Object} [options] followed options is available. Default is undefined
+ * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
+ * @param {onerror} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+ * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
  * @example
 	//Simplest example. Append script into head node.
 	loadScript.sync( 'sync.js' );
@@ -80,15 +79,11 @@ function sync( src, options ) {
 
 /**
  * Asynchronous load JavaScript file
- * @param {string} src URL of an external script file or array of the script file names.
- * @param {object} options followed options is available. Default is undefined
- * {
- *	onload: function () The onload event occurs when a script has been loaded. Default is undefined.
- *	onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
- *		str: error details
- *		e: event
- *	appendTo: The node to which the new script will be append. Default is head node
- * }
+ * @param {string|string[]} src URL of an external script file or array of the script file names.
+ * @param {Object} [options] followed options is available. Default is undefined
+ * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
+ * @param {onerror} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+ * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
  * @example
  * 
  * //Simplest example. Append script into head node.
@@ -181,7 +176,7 @@ function async( src, options ) {
 				// Rest
 				function _onload() {
 
-					//console.log( 'loadScript.onload() ' + this.src );
+					//console.log( 'loadScript.onload() ' + this.url );
 					if ( options.onload !== undefined ) {
 
 						if ( src instanceof Array && ( isrc < ( src.length - 1 ) ) ) {
@@ -250,4 +245,4 @@ function isScriptExists( elParent, srcAsync, onload ) {
 
 }
 
-export { async, sync };
+export { async, sync, escapeHtml };

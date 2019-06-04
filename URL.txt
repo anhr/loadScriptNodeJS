@@ -1,5 +1,8 @@
 test page
 https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html
+-------------------------------------------
+JSDoc 3 is an API documentation generator for JavaScript
+https://jsdoc.app/
 --------------------------------
 Building loadScript
 

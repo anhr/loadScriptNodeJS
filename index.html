@@ -6,29 +6,6 @@
 	<title>loadScript</title>
 	<meta name="author" content="Andrej Hristoliubov https://anhr.github.io/AboutMe/">
 	<script src="build/loadScript.js"></script>
-	<script>
-
-		function escapeHtml(str) {
-
-			return str.replace( /[&<>"'\/]/g, function ( s ) {
-
-				var entityMap = {
-
-					"&": "&amp;",
-					"<": "&lt;",
-					">": "&gt;",
-					'"': '&quot;',
-					"'": '&#39;',
-					"/": '&#x2F;'
-
-				};
-
-				return entityMap[s];
-
-			});
-		}
-
-	</script>
 </head>
 <body>
 	<p><a href='https://anhr.github.io/index.html' target="_blank">Home</a> | <a href='https://github.com/anhr/loadScriptNodeJS' target="_blank">GitHub</a></p>
@@ -104,7 +81,7 @@
 					var str = 'file has been loaded successfully';
 					console.log( str );
 					elAsyncAppendToRes.innerHTML = str;
-					document.getElementById( "appendtoinner" ).innerHTML = "Node content: '" + escapeHtml( elAppendTo.innerHTML ) + "'";
+					document.getElementById( "appendtoinner" ).innerHTML = "Node content: '" + loadScript.escapeHtml( elAppendTo.innerHTML ) + "'";
 
 				},
 				onerror: function ( str, e ) {
@@ -174,7 +151,7 @@
 
 				var str = 'file has been loaded successfully';
 				console.log( str );
-				elSync2Res.innerHTML = escapeHtml( response );
+				elSync2Res.innerHTML = loadScript.escapeHtml( response );
 
 			},
 			onerror: function ( str ) {
@@ -185,8 +162,8 @@
 			},
 			appendTo: elAppendToSync2,
 		},
-		);
-	document.getElementById( "appendtoinnersync2" ).innerHTML = "Node content: '" + escapeHtml( elAppendToSync2.innerHTML ) + "'";
+	);
+	document.getElementById( "appendtoinnersync2" ).innerHTML = "Node content: '" + loadScript.escapeHtml( elAppendToSync2.innerHTML ) + "'";
 	</script>
 </body>
 </html>

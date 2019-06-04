@@ -15,8 +15,6 @@
 }(this, (function (exports) { 'use strict';
 
 function myRequest(options) {
-	options = options || {};
-	options.onerror = options.onerror || function () {};
 	this.loadXMLDoc = function () {
 		var req;
 		if (window.XMLHttpRequest) {
@@ -172,6 +170,9 @@ function myRequest(options) {
 	}
 }
 function sync(url, options) {
+	options = options || {};
+	options.onload = options.onload || function () {};
+	options.onerror = options.onerror || function () {};
 	var response,
 	    request = new myRequest(options);
 	request.url = url;
@@ -186,84 +187,98 @@ function sync(url, options) {
 	);
 	return response;
 }
+function escapeHtml(str) {
+	return str.replace(/[&<>"'\/]/g, function (s) {
+		var entityMap = {
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;",
+			'"': '&quot;',
+			"'": '&#39;',
+			"/": '&#x2F;'
+		};
+		return entityMap[s];
+	});
+}
 
 function sync$1(src, options) {
-  options = options || {};
-  options.onload = options.onload || function () {};
-  options.onerror = options.onerror || function () {};
-  options.appendTo = options.appendTo || document.getElementsByTagName('head')[0];
-  if (isScriptExists(options.appendTo, src)) {
-    options.onerror('duplicate downloading of the ' + src + ' file');
-    return;
-  }
-  loadScriptBase(function (script) {
-    script.setAttribute("id", src);
-    script.innerHTML = sync(src, options);
-  }, options.appendTo);
+	options = options || {};
+	options.onload = options.onload || function () {};
+	options.onerror = options.onerror || function () {};
+	options.appendTo = options.appendTo || document.getElementsByTagName('head')[0];
+	if (isScriptExists(options.appendTo, src)) {
+		options.onerror('duplicate downloading of the ' + src + ' file');
+		return;
+	}
+	loadScriptBase(function (script) {
+		script.setAttribute("id", src);
+		script.innerHTML = sync(src, options);
+	}, options.appendTo);
 }
 function async(src, options) {
-  options = options || {};
-  options.appendTo = options.appendTo || document.getElementsByTagName('head')[0];
-  options.onload = options.onload || function () {};
-  var isrc;
-  function async(srcAsync) {
-    if (isScriptExists(options.appendTo, srcAsync, options.onload)) return;
-    loadScriptBase(function (script) {
-      script.setAttribute("id", srcAsync);
-      if (script.readyState && !script.onload) {
-        script.onreadystatechange = function () {
-          if (script.readyState == "complete") {
-            if (options.onload !== undefined) options.onload();
-          }
-          if (script.readyState == "loaded") {
-            setTimeout(options.onload, 0);
-            this.onreadystatechange = null;
-          }
-        };
-      } else {
-        function _onload() {
-          if (options.onload !== undefined) {
-            if (src instanceof Array && isrc < src.length - 1) {
-              isrc++;
-              async(src[isrc]);
-            } else options.onload();
-          }
-        }
-        script.onload = _onload;
-        script.onerror = function (e) {
-          var str = 'loadScript: "' + this.src + '" failed';
-          if (options.onerror !== undefined) options.onerror(str, e);
-          console.error(str);
-        };
-      }
-      script.src = srcAsync;
-    }, options.appendTo);
-  }
-  if (src instanceof Array) {
-    isrc = 0;
-    async(src[isrc]);
-  } else async(src);
+	options = options || {};
+	options.appendTo = options.appendTo || document.getElementsByTagName('head')[0];
+	options.onload = options.onload || function () {};
+	var isrc;
+	function async(srcAsync) {
+		if (isScriptExists(options.appendTo, srcAsync, options.onload)) return;
+		loadScriptBase(function (script) {
+			script.setAttribute("id", srcAsync);
+			if (script.readyState && !script.onload) {
+				script.onreadystatechange = function () {
+					if (script.readyState == "complete") {
+						if (options.onload !== undefined) options.onload();
+					}
+					if (script.readyState == "loaded") {
+						setTimeout(options.onload, 0);
+						this.onreadystatechange = null;
+					}
+				};
+			} else {
+				function _onload() {
+					if (options.onload !== undefined) {
+						if (src instanceof Array && isrc < src.length - 1) {
+							isrc++;
+							async(src[isrc]);
+						} else options.onload();
+					}
+				}
+				script.onload = _onload;
+				script.onerror = function (e) {
+					var str = 'loadScript: "' + this.src + '" failed';
+					if (options.onerror !== undefined) options.onerror(str, e);
+					console.error(str);
+				};
+			}
+			script.src = srcAsync;
+		}, options.appendTo);
+	}
+	if (src instanceof Array) {
+		isrc = 0;
+		async(src[isrc]);
+	} else async(src);
 }
 function loadScriptBase(callback, appendTo) {
-  var script = document.createElement('script');
-  script.setAttribute("type", 'text/javascript');
-  callback(script);
-  appendTo.appendChild(script);
+	var script = document.createElement('script');
+	script.setAttribute("type", 'text/javascript');
+	callback(script);
+	appendTo.appendChild(script);
 }
 function isScriptExists(elParent, srcAsync, onload) {
-  var scripts = elParent.querySelectorAll('script');
-  for (var i = 0; i < scripts.length; i++) {
-    var child = scripts[i];
-    if (child.id == srcAsync) {
-      if (onload !== undefined) onload();
-      return true;
-    }
-  }
-  return false;
+	var scripts = elParent.querySelectorAll('script');
+	for (var i = 0; i < scripts.length; i++) {
+		var child = scripts[i];
+		if (child.id == srcAsync) {
+			if (onload !== undefined) onload();
+			return true;
+		}
+	}
+	return false;
 }
 
 exports.async = async;
 exports.sync = sync$1;
+exports.escapeHtml = escapeHtml;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
