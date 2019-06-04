@@ -1,5 +1,5 @@
 ﻿# loadScript
-The loadScript is node.js version of the load JavaScript file.
+The loadScript is node.js version of the load JavaScript file. [Example](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 
 Thanks to: [http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html](http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html)
 
@@ -11,8 +11,12 @@ The easiest way to use loadScript in your code is by using the built source at `
 These built JavaScript files bundle all the necessary dependencies to run loadScript.
 
 In your `head` tag, include the following code:
-```html
+```
 <script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.js"></script>
+```
+or
+```
+<script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.min.js"></script>
 ```
 
 Now you can use window.loadScript for loading of your JavaScript files.
@@ -21,19 +25,19 @@ Now you can use window.loadScript for loading of your JavaScript files.
 
 Asynchronous load JavaScript file.
 
-src: URL of an external script file or array of the script file names.
+	src: URL of an external script file or array of the script file names.
 
-options: followed options is available
+	options: followed options is available
 
-    onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+		onload: function () The onload event occurs when a script has been loaded. Default is undefined.
 
-    onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+		onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
 
-        str: error details
+			str: error details
 
-        e: event
+			e: event
 
-    appendTo: The node to which the new script will be append. Default is head node.
+		appendTo: The node to which the new script will be append. Default is head node.
 
 ### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
