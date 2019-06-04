@@ -157,6 +157,22 @@ function async( src, options ) {
 
 			script.setAttribute( "id", srcAsync );
 
+			function _onload() {
+
+				//console.log( 'loadScript.onload() ' + this.url );
+				if ( options.onload !== undefined ) {
+
+					if ( src instanceof Array && ( isrc < ( src.length - 1 ) ) ) {
+
+						isrc++;
+						async( src[isrc] );
+
+					} else options.onload();
+
+				}
+
+			}
+
 			if ( script.readyState && ! script.onload ) {
 
 				// IE, Opera
@@ -183,21 +199,6 @@ function async( src, options ) {
 			} else {
 
 				// Rest
-				function _onload() {
-
-					//console.log( 'loadScript.onload() ' + this.url );
-					if ( options.onload !== undefined ) {
-
-						if ( src instanceof Array && ( isrc < ( src.length - 1 ) ) ) {
-
-							isrc ++;
-							async( src[ isrc ] );
-
-						} else options.onload();
-
-					}
-
-				}
 				script.onload = _onload;
 
 				script.onerror = function ( e ) {

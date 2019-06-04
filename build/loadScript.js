@@ -1,5 +1,6 @@
 /**
  * node.js version of the load JavaScript file
+ * @author Andrej Hristoliubov https://anhr.github.io/AboutMe/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -224,6 +225,14 @@ function async(src, options) {
 		if (isScriptExists(options.appendTo, srcAsync, options.onload)) return;
 		loadScriptBase(function (script) {
 			script.setAttribute("id", srcAsync);
+			function _onload() {
+				if (options.onload !== undefined) {
+					if (src instanceof Array && isrc < src.length - 1) {
+						isrc++;
+						async(src[isrc]);
+					} else options.onload();
+				}
+			}
 			if (script.readyState && !script.onload) {
 				script.onreadystatechange = function () {
 					if (script.readyState == "complete") {
@@ -235,14 +244,6 @@ function async(src, options) {
 					}
 				};
 			} else {
-				function _onload() {
-					if (options.onload !== undefined) {
-						if (src instanceof Array && isrc < src.length - 1) {
-							isrc++;
-							async(src[isrc]);
-						} else options.onload();
-					}
-				}
 				script.onload = _onload;
 				script.onerror = function (e) {
 					var str = 'loadScript: "' + this.src + '" failed';

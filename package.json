@@ -4,7 +4,7 @@
   "description": "node.js version of the load JavaScript file",
   "main": "build/loadScript.js",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c && rollup -c rollup.config.min.js"
   },
   "repository": {
     "type": "git",
