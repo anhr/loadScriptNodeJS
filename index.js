@@ -1,5 +1,6 @@
 /**
  * node.js version of the load JavaScript file
+ * @author Andrej Hristoliubov https://anhr.github.io/AboutMe/
  *
  * Thanks to:
  *http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html
@@ -16,6 +17,7 @@
 
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
 import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
+
 /**
  * @callback onerror
  * @param {string} str - error details
@@ -29,10 +31,14 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
  * @param {onerror} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
  * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
+ * 
  * @example
+ * 
 	//Simplest example. Append script into head node.
 	loadScript.sync( 'sync.js' );
- 
+
+ * @example
+ * 
 	//onload, onerror events. Append script into "appendto" element
 	loadScript.sync( 'sync.js',
 		{
@@ -40,13 +46,11 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
 
 				var str = 'file has been loaded successfully';
 				console.log( str );
-				elSync2Res.innerHTML = escapeHtml( response );
 
 			},
-			onerror: function ( str ) {
+			onerror: function ( str, e ) {
 
 				elSync2Res.style.color = 'red';
-				elSync2Res.innerHTML = str;
 
 			},
 			appendTo: document.getElementById( "appendto" ),
@@ -84,52 +88,57 @@ function sync( src, options ) {
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
  * @param {onerror} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
  * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
+ * 
  * @example
  * 
- * //Simplest example. Append script into head node.
- * loadScript.async( "JavaScript.js);
+	//Simplest example. Append script into head node.
+	loadScript.async( "JavaScript.js);
  * 
- * //onload, onerror events. Append script into "appendto" element
- * loadScript.async( "JavaScript.js",
- *	{
- *		onload: function () {
+ * @example
  *
- *			var str = 'file has been loaded successfully';
- *			console.log( str );
+	//onload, onerror events. Append script into "appendto" element
+	loadScript.async( "JavaScript.js",
+	{
+ 		onload: function () {
+ 
+ 			var str = 'file has been loaded successfully';
+ 			console.log( str );
+ 
+ 		},
+ 		onerror: function ( str, e ) {
+ 
+ 			console.error( str );
+ 
+ 		},
+ 		appendTo: document.getElementById( "appendto" ),
+ 
+ 	}
+ 
+  );
  *
- *		},
- *		onerror: function ( str, e ) {
+ * @example
  *
- *			console.error( str );
- *
- *		},
- *		appendTo: document.getElementById( "appendto" ),
- *
- *	}
- *
- * );
- *
- * //loading of array of JavaScript files. Append script into head node.
- * loadScript.async( [
- *		"JavaScript1.js",
- *		"JavaScript2.js",
- *	],
- *	{
- *		onload: function () {
- *
- *			var str = 'file has been loaded successfully';
- *			console.log( str );
- *
- *		},
- *		onerror: function ( str, e ) {
- *
- *			console.error( str );
- *
- *		},
- *
- *	}
- *
- * );
+	//loading of array of JavaScript files. Append script into head node.
+	loadScript.async( [
+ 		"JavaScript1.js",
+ 		"JavaScript2.js",
+ 	],
+ 	{
+ 		onload: function () {
+ 
+ 			var str = 'file has been loaded successfully';
+ 			console.log( str );
+ 
+ 		},
+ 		onerror: function ( str, e ) {
+ 
+ 			console.error( str );
+ 
+ 		},
+ 
+ 	}
+ 
+  );
  */
 function async( src, options ) {
 
