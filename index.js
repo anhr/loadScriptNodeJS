@@ -25,10 +25,10 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
 /**
  * Synchronous load JavaScript file
  * @param {string} src URL of an external script file.
- * @param {Object} [options] followed options is available. Default is undefined
- * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
- * @param {onerror} [options.onerror] function ( str ) The onerror event occurs when an error has been occured. Default is undefined.
- * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
+ * @param {Object} [options] followed options is available. Optional.
+ * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Optional.
+ * @param {onerror} [options.onerror] function ( str ) The onerror event occurs when an error has been occured. Optional.
+ * @param {}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
  * 
  * @example
  * 
@@ -87,10 +87,10 @@ function sync( src, options ) {
 /**
  * Asynchronous load JavaScript file
  * @param {string|string[]} src URL of an external script file or array of the script file names.
- * @param {Object} [options] followed options is available. Default is undefined
- * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
- * @param {onerrorasync} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
- * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
+ * @param {Object} [options] followed options is available. Optional.
+ * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Optional.
+ * @param {onerrorasync} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Optional.
+ * @param {}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
  * 
  * @example
  * 
