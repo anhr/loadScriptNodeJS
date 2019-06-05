@@ -1,5 +1,5 @@
 ﻿# loadScript
-The loadScript is node.js version of the load JavaScript file. [Example](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
+The loadScript is node.js version of the load JavaScript file. [Example of using](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 
 ## Packaged Builds
 The easiest way to use loadScript in your code is by using the built source at `build/loadScript.js`.
@@ -85,6 +85,46 @@ loadScript.async( [
 
 	}
 	
+);
+```
+
+### loadScript.sync( src, [options] )
+
+Synchronous load JavaScript file.
+
+	src: URL of an external script file or array of the script file names.
+
+	options: followed options is available
+
+		onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+
+		onerror: function ( str ) The onerror event occurs when an error has been occured. Default is undefined.
+
+			str: error details
+
+		appendTo: The node to which the new script will be append. Default is head node.
+
+### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
+```
+//Synchronous load JavaScript file
+loadScript.sync( "JavaScript.js" );
+```
+```
+//Synchronous load JavaScript file with events
+loadScript.sync( 'JavaScript.js',
+	{
+		onload: function ( response ) {
+
+			console.log( 'JavaScript.js file content: ' + response );
+
+		},
+		onerror: function ( str ) {
+
+			console.error( str );
+
+		},
+		appendTo: document.getElementById( "appendto" ),
+	},
 );
 ```
 

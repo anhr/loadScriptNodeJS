@@ -17,11 +17,9 @@
 
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
 import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
-
 /**
  * @callback onerror
  * @param {string} str - error details
- * @param {Object} e - event
  */
 
 /**
@@ -29,7 +27,7 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
  * @param {string} src URL of an external script file.
  * @param {Object} [options] followed options is available. Default is undefined
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
- * @param {onerror} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+ * @param {onerror} [options.onerror] function ( str ) The onerror event occurs when an error has been occured. Default is undefined.
  * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
  * 
  * @example
@@ -80,13 +78,18 @@ function sync( src, options ) {
 	}, options.appendTo );
 
 }
+/**
+ * @callback onerrorasync
+ * @param {string} str - error details
+ * @param {Object} e - event
+ */
 
 /**
  * Asynchronous load JavaScript file
  * @param {string|string[]} src URL of an external script file or array of the script file names.
  * @param {Object} [options] followed options is available. Default is undefined
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Default is undefined.
- * @param {onerror} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+ * @param {onerrorasync} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
  * @param {}[options.appendTo] The node to which the new script will be append. Default is head node
  * 
  * @example
