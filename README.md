@@ -34,7 +34,7 @@ Asynchronous load JavaScript file.
 
 		appendTo: The node to which the new script will be append. Default is head node.
 
-### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
+#### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
 //Asynchronous load JavaScript file
 loadScript.async( "JavaScript.js" );
@@ -104,7 +104,7 @@ Synchronous load JavaScript file.
 
 		appendTo: The node to which the new script will be append. Default is head node.
 
-### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
+#### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
 //Synchronous load JavaScript file
 loadScript.sync( "JavaScript.js" );
