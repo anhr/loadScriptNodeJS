@@ -28,8 +28,13 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
  * @param {Object} [options] followed options is available. Optional.
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Optional.
  * @param {onerror} [options.onerror] function ( str ) The onerror event occurs when an error has been occured. Optional.
- * @param {}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
- * 
+ * @param {string}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
+ * @param {Object}[options.tag] The script's tag attributes. Optional.
+ * @param {string} options.tag.name tag name. Default is 'script'
+ * @param {Object} [options.tag.attribute] tag attribute. Optional.
+ * @param {string} options.tag.attribute.name attribute name. Default is 'type'
+ * @param {string} options.tag.attribute.value attribute value. Default is 'text/javascript'
+ *
  * @example
  * 
 	//Simplest example. Append script into head node.
@@ -54,6 +59,26 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
 			appendTo: document.getElementById( "appendto" ),
 		},
 	);
+ *
+ * @example
+ *
+	//Append style into head node.
+	loadScript.sync( "controls.css",
+	{
+		//style rel="stylesheet"
+		tag: {
+
+			name: 'style',
+			attribute: {
+
+				name: 'rel',
+				value: 'stylesheet',
+
+			}
+
+		}
+
+	} );
 
  */
 function sync( src, options ) {
@@ -75,9 +100,10 @@ function sync( src, options ) {
 		script.setAttribute( "id", src );
 		script.innerHTML = loadFileSync( src, options );
 
-	}, options.appendTo );
+	}, options );
 
 }
+
 /**
  * @callback onerrorasync
  * @param {string} str - error details
@@ -90,8 +116,13 @@ function sync( src, options ) {
  * @param {Object} [options] followed options is available. Optional.
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Optional.
  * @param {onerrorasync} [options.onerror] function ( str, e ) The onerror event occurs when an error has been occured. Optional.
- * @param {}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
- * 
+ * @param {string}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
+ * @param {Object}[options.tag] The script's tag attributes. Optional.
+ * @param {string} options.tag.name tag name. Default is 'script'
+ * @param {Object} [options.tag.attribute] tag attribute. Optional.
+ * @param {string} options.tag.attribute.name attribute name. Default is 'type'
+ * @param {string} options.tag.attribute.value attribute value. Default is 'text/javascript'
+*
  * @example
  * 
 	//Simplest example. Append script into head node.
@@ -217,7 +248,7 @@ function async( src, options ) {
 
 			script.src = srcAsync;
 
-		}, options.appendTo );
+		}, options );
 
 	}
 
@@ -230,12 +261,20 @@ function async( src, options ) {
 
 }
 
-function loadScriptBase( callback, appendTo ) {
+function loadScriptBase( callback, options ) {
 
-	var script = document.createElement( 'script' );
-	script.setAttribute( "type", 'text/javascript' );
+	options.tag = options.tag || {};
+
+	options.tag.name = options.tag.name || 'script';
+	var script = document.createElement( options.tag.name );
+
+	options.tag.attribute = options.tag.attribute || {};
+	options.tag.attribute.name = options.tag.attribute.name || "type";
+	options.tag.attribute.value = options.tag.attribute.value || 'text/javascript';
+	script.setAttribute( options.tag.attribute.name, options.tag.attribute.value );
+
 	callback( script );
-	appendTo.appendChild( script );
+	options.appendTo.appendChild( script );
 
 }
 

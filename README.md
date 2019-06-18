@@ -24,15 +24,20 @@ Asynchronous load JavaScript file.
 
 	options: followed options is available
 
-		onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+		[onload]: function () The onload event occurs when a script has been loaded. Default is undefined.
 
-		onerror: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
+		[onerror]: function ( str, e ) The onerror event occurs when an error has been occured. Default is undefined.
 
 			str: error details
 
 			e: event
 
-		appendTo: The node to which the new script will be append. Default is head node.
+		[appendTo]: The node to which the new script will be append. Default is head node.
+		[tag]: The script's tag attributes. Optional.
+			name: tag name. Default is 'script'
+			[attribute]: tag attribute. Optional.
+				name: attribute name. Default is 'type'
+				value: attribute value. Default is 'text/javascript'
 
 #### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
@@ -96,13 +101,18 @@ Synchronous load JavaScript file.
 
 	options: followed options is available
 
-		onload: function () The onload event occurs when a script has been loaded. Default is undefined.
+		[onload]: function () The onload event occurs when a script has been loaded. Default is undefined.
 
-		onerror: function ( str ) The onerror event occurs when an error has been occured. Default is undefined.
+		[onerror]: function ( str ) The onerror event occurs when an error has been occured. Default is undefined.
 
 			str: error details
 
-		appendTo: The node to which the new script will be append. Default is head node.
+		[appendTo]: The node to which the new script will be append. Default is head node.
+		[tag]: The script's tag attributes. Optional.
+			name: tag name. Default is 'script'
+			[attribute]: tag attribute. Optional.
+				name: attribute name. Default is 'type'
+				value: attribute value. Default is 'text/javascript'
 
 #### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```
@@ -126,6 +136,25 @@ loadScript.sync( 'JavaScript.js',
 		appendTo: document.getElementById( "appendto" ),
 	},
 );
+```
+```
+//Append style into head node.
+loadScript.sync( "controls.css",
+{
+	//style rel="stylesheet"
+	tag: {
+
+		name: 'style',
+		attribute: {
+
+			name: 'rel',
+			value: 'stylesheet',
+
+		}
+
+	}
+
+} );
 ```
 
 ## Directory Contents

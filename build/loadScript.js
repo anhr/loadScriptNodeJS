@@ -214,7 +214,7 @@ function sync$1(src, options) {
 	loadScriptBase(function (script) {
 		script.setAttribute("id", src);
 		script.innerHTML = sync(src, options);
-	}, options.appendTo);
+	}, options);
 }
 function async(src, options) {
 	options = options || {};
@@ -252,18 +252,23 @@ function async(src, options) {
 				};
 			}
 			script.src = srcAsync;
-		}, options.appendTo);
+		}, options);
 	}
 	if (src instanceof Array) {
 		isrc = 0;
 		async(src[isrc]);
 	} else async(src);
 }
-function loadScriptBase(callback, appendTo) {
-	var script = document.createElement('script');
-	script.setAttribute("type", 'text/javascript');
+function loadScriptBase(callback, options) {
+	options.tag = options.tag || {};
+	options.tag.name = options.tag.name || 'script';
+	var script = document.createElement(options.tag.name);
+	options.tag.attribute = options.tag.attribute || {};
+	options.tag.attribute.name = options.tag.attribute.name || "type";
+	options.tag.attribute.value = options.tag.attribute.value || 'text/javascript';
+	script.setAttribute(options.tag.attribute.name, options.tag.attribute.value);
 	callback(script);
-	appendTo.appendChild(script);
+	options.appendTo.appendChild(script);
 }
 function isScriptExists(elParent, srcAsync, onload) {
 	var scripts = elParent.querySelectorAll('script');
