@@ -44,6 +44,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="licenseBanner.txt" />
+    <Content Include="loadScript.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />

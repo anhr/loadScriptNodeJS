@@ -13,6 +13,10 @@ or
 ```
 <script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.min.js"></script>
 ```
+or you can import loadScript from loadScript.js file into your JavaScript module. [Example.](https://raw.githack.com/anhr/DropdownMenu/master/Examples/html/) [Code of example.](https://github.com/anhr/DropdownMenu/blob/master/index.js)
+```
+import loadScript from 'loadFile.js';
+```
 
 Now you can use window.loadScript for loading of your JavaScript files.
 
