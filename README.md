@@ -39,9 +39,12 @@ Asynchronous load JavaScript file.
 		[appendTo]: The node to which the new script will be append. Default is head node.
 		[tag]: The script's tag attributes. Optional.
 			name: tag name. Default is 'script'
-			[attribute]: tag attribute. Optional.
-				name: attribute name. Default is 'type'
-				value: attribute value. Default is 'text/javascript'
+			[attribute]: The script's tag attributes (Object) or tag type (string). Optional.
+				tag attributes (Object):
+					name: attribute name. Default is 'type'
+					value: attribute value. Default is 'text/javascript'
+				Available tag types (string):
+					'style' - load a style file (.css extension)
 
 #### [Examples](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 ```

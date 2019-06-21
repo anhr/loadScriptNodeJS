@@ -261,6 +261,22 @@ function async(src, options) {
 }
 function loadScriptBase(callback, options) {
 	options.tag = options.tag || {};
+	if (typeof options.tag === "string") {
+		switch (options.tag) {
+			case 'style':
+				options.tag = {
+					name: 'style',
+					attribute: {
+						name: 'rel',
+						value: 'stylesheet'
+					}
+				};
+				break;
+			default:
+				console.error('Invalid options.tag: ' + options.tag);
+				return;
+		}
+	}
 	options.tag.name = options.tag.name || 'script';
 	var script = document.createElement(options.tag.name);
 	options.tag.attribute = options.tag.attribute || {};

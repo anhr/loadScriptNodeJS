@@ -14,7 +14,6 @@
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  */
-
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
 import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
 /**
@@ -29,8 +28,10 @@ import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
  * @param {Function} [options.onload] function () The onload event occurs when a script has been loaded. Optional.
  * @param {onerror} [options.onerror] function ( str ) The onerror event occurs when an error has been occured. Optional.
  * @param {string}[options.appendTo] The node to which the new script will be append. Optional. Default is head node
- * @param {Object}[options.tag] The script's tag attributes. Optional.
- * @param {string} options.tag.name tag name. Default is 'script'
+ * @param {Object|string}[options.tag] The script's tag attributes (Object) or tag type (string). Optional.
+ * Available tag types:
+ *	'style' - load a style file (.css extension)
+ * @param {string} [options.tag.name] tag name. Default is 'script'
  * @param {Object} [options.tag.attribute] tag attribute. Optional.
  * @param {string} options.tag.attribute.name attribute name. Default is 'type'
  * @param {string} options.tag.attribute.value attribute value. Default is 'text/javascript'
@@ -264,6 +265,28 @@ function async( src, options ) {
 function loadScriptBase( callback, options ) {
 
 	options.tag = options.tag || {};
+	if ( typeof options.tag === "string" ) {
+
+		switch ( options.tag ) {
+
+			case 'style':
+				options.tag = {
+
+					name: 'style',
+					attribute: {
+
+						name: 'rel',
+						value: 'stylesheet',
+
+					}
+
+				}
+				break;
+			default: console.error( 'Invalid options.tag: ' + options.tag );
+				return;
+		}
+
+	}
 
 	options.tag.name = options.tag.name || 'script';
 	var script = document.createElement( options.tag.name );
