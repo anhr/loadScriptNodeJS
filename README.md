@@ -15,7 +15,7 @@ or
 ```
 or you can import loadScript from loadScript.js file into your JavaScript module. [Example.](https://raw.githack.com/anhr/DropdownMenu/master/Examples/html/) [Code of example.](https://github.com/anhr/DropdownMenu/blob/master/index.js)
 ```
-import loadScript from 'loadFile.js';
+import loadScript from 'loadScript.js';
 ```
 
 Now you can use window.loadScript for loading of your JavaScript files.
