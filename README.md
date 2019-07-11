@@ -149,6 +149,23 @@ loadScript.sync( 'JavaScript.js',
 );
 ```
 ```
+//Synchronous load of array of JavaScript files with events
+loadScript.sync( ['JavaScript.js', 'JavaScript2.js'],
+	{
+		onload: function ( response ) {
+
+			console.log( 'JavaScript.js and JavaScript2.js files has been loaded successfully' );
+
+		},
+		onerror: function ( str ) {
+
+			console.error( str );
+
+		},
+	},
+);
+```
+```
 //Append style into head node.
 loadScript.sync( "controls.css",
 {
