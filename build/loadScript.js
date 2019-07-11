@@ -211,7 +211,26 @@ function sync$1(src, options) {
 		options.onerror('duplicate downloading of the ' + src + ' file');
 		return;
 	}
-	loadScriptBase(function (script) {
+	if (src instanceof Array) {
+		var error,
+		    optionsItem = {
+			appendTo: options.appendTo,
+			tag: options.tag,
+			onerror: function (str) {
+				options.onerror(str);
+				error = str;
+			}
+		};
+		for (var i = 0; i < src.length; i++) {
+			var item = src[i];
+			loadScriptBase(function (script) {
+				script.setAttribute("id", item);
+				script.innerHTML = sync(item, optionsItem);
+			}, optionsItem);
+			if (error !== undefined) break;
+		}
+		if (error === undefined) options.onload();
+	} else loadScriptBase(function (script) {
 		script.setAttribute("id", src);
 		script.innerHTML = sync(src, options);
 	}, options);

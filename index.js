@@ -96,7 +96,45 @@ function sync( src, options ) {
 
 	}
 
-	loadScriptBase( function ( script ) {
+	if ( src instanceof Array ) {
+
+		var error,
+			optionsItem = {
+
+				appendTo: options.appendTo,
+				tag: options.tag,
+/*
+					onload: function ( response ) {
+				
+						options.onload( response );
+				
+					},
+*/
+				onerror: function ( str ) {
+
+					options.onerror( str );
+					error = str;
+
+				},
+
+			};
+		for ( var i = 0; i < src.length; i++ ) {
+
+			var item = src[ i ];
+			loadScriptBase( function ( script ) {
+
+				script.setAttribute( "id", item );
+				script.innerHTML = loadFileSync( item, optionsItem );
+
+			}, optionsItem );
+			if ( error !== undefined )
+				break;
+
+		};
+		if ( error === undefined )
+			options.onload();
+
+	} else loadScriptBase( function ( script ) {
 
 		script.setAttribute( "id", src );
 		script.innerHTML = loadFileSync( src, options );
