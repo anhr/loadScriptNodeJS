@@ -91,7 +91,8 @@ function sync( src, options ) {
 
 	if ( isScriptExists( options.appendTo, src ) ) {
 
-		options.onerror( 'duplicate downloading of the ' + src + ' file' );
+		//options.onerror( 'duplicate downloading of the ' + src + ' file' );
+		options.onload();
 		return;
 
 	}
@@ -103,13 +104,11 @@ function sync( src, options ) {
 
 				appendTo: options.appendTo,
 				tag: options.tag,
-/*
-					onload: function ( response ) {
+				onload: function ( response, url ) {
 				
-						options.onload( response );
+					console.log( 'loadScript.sync.onload: ' + url );
 				
-					},
-*/
+				},
 				onerror: function ( str ) {
 
 					options.onerror( str );
@@ -223,8 +222,23 @@ function async( src, options ) {
 
 	function async( srcAsync ) {
 
-		if ( isScriptExists( options.appendTo, srcAsync, options.onload ) )
+		function next() {
+
+			if ( src instanceof Array && ( isrc < ( src.length - 1 ) ) ) {
+
+				isrc++;
+				async( src[isrc] );
+
+			} else options.onload();
+
+		}
+
+		if ( isScriptExists( options.appendTo, srcAsync, options.onload ) ) {
+
+			next();
 			return;
+
+		}
 
 		loadScriptBase( function ( script ) {
 
@@ -232,15 +246,18 @@ function async( src, options ) {
 
 			function _onload() {
 
-				//console.log( 'loadScript.onload() ' + this.url );
+				console.log( 'loadScript.async.onload() ' + srcAsync );
 				if ( options.onload !== undefined ) {
 
+					next();
+/*
 					if ( src instanceof Array && ( isrc < ( src.length - 1 ) ) ) {
 
 						isrc++;
 						async( src[isrc] );
 
 					} else options.onload();
+*/
 
 				}
 
@@ -345,10 +362,12 @@ function isScriptExists( elParent, srcAsync, onload ) {
 	for ( var i = 0; i < scripts.length; i++ ) {
 
 		var child = scripts[i];
-		if ( child.id == srcAsync ) {
+		if ( child.id === srcAsync ) {
 
+/*
 			if ( onload !== undefined )
 				onload();
+*/
 			return true;
 
 		}

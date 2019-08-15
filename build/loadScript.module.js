@@ -175,7 +175,8 @@ function sync(url, options) {
 		request.ProcessReqChange(function (myRequest) {
 			if (myRequest.processStatus200Error()) return;
 			response = myRequest.req.responseText;
-			options.onload(response);
+			console.log('loadFile.sync.onload() ' + url);
+			options.onload(response, url);
 			return;
 		});
 	}, false
@@ -202,7 +203,7 @@ function sync$1(src, options) {
 	options.onerror = options.onerror || function () {};
 	options.appendTo = options.appendTo || document.getElementsByTagName('head')[0];
 	if (isScriptExists(options.appendTo, src)) {
-		options.onerror('duplicate downloading of the ' + src + ' file');
+		options.onload();
 		return;
 	}
 	if (src instanceof Array) {
@@ -210,7 +211,10 @@ function sync$1(src, options) {
 		    optionsItem = {
 			appendTo: options.appendTo,
 			tag: options.tag,
-			onerror: function (str) {
+			onload: function onload(response, url) {
+				console.log('loadScript.sync.onload: ' + url);
+			},
+			onerror: function onerror(str) {
 				options.onerror(str);
 				error = str;
 			}
@@ -235,15 +239,22 @@ function async(src, options) {
 	options.onload = options.onload || function () {};
 	var isrc;
 	function async(srcAsync) {
-		if (isScriptExists(options.appendTo, srcAsync, options.onload)) return;
+		function next() {
+			if (src instanceof Array && isrc < src.length - 1) {
+				isrc++;
+				async(src[isrc]);
+			} else options.onload();
+		}
+		if (isScriptExists(options.appendTo, srcAsync, options.onload)) {
+			next();
+			return;
+		}
 		loadScriptBase(function (script) {
 			script.setAttribute("id", srcAsync);
 			function _onload() {
+				console.log('loadScript.async.onload() ' + srcAsync);
 				if (options.onload !== undefined) {
-					if (src instanceof Array && isrc < src.length - 1) {
-						isrc++;
-						async(src[isrc]);
-					} else options.onload();
+					next();
 				}
 			}
 			if (script.readyState && !script.onload) {
@@ -303,8 +314,7 @@ function isScriptExists(elParent, srcAsync, onload) {
 	var scripts = elParent.querySelectorAll('script');
 	for (var i = 0; i < scripts.length; i++) {
 		var child = scripts[i];
-		if (child.id == srcAsync) {
-			if (onload !== undefined) onload();
+		if (child.id === srcAsync) {
 			return true;
 		}
 	}

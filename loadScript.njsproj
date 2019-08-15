@@ -43,6 +43,7 @@
     <Content Include="JavaScript2.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="JavaScript3.js" />
     <Content Include="licenseBanner.txt" />
     <Content Include="loadScript.js">
       <SubType>Code</SubType>

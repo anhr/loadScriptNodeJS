@@ -6,9 +6,9 @@
 	<title>loadScript</title>
 	<meta name="author" content="Andrej Hristoliubov https://anhr.github.io/AboutMe/">
 
-	<!--<script src="build/loadScript.js"></script>-->
+	<script src="build/loadScript.js"></script>
 	<!--<script src="build/loadScript.min.js"></script>-->
-	<script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.js"></script>
+	<!--<script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.js"></script>-->
 	<!--<script src="https://raw.githack.com/anhr/loadScriptNodeJS/master/build/loadScript.min.js"></script>-->
 
 </head>
@@ -108,6 +108,23 @@
 	<script type="text/javascript">
 		const elAsyncArrayRes = document.getElementById( "asyncarrayres" );
 		loadScript.async( ["JavaScript1.js", "JavaScript2.js"],
+			{
+				onload: function () {
+
+					var str = 'file has been loaded successfully';
+					console.log( str );
+					elAsyncArrayRes.innerHTML = str;
+
+				},
+				onerror: function ( str, e ) {
+
+					elAsyncArrayRes.style.color = 'red';
+					elAsyncArrayRes.innerHTML = str;
+
+				},
+
+			} );
+		loadScript.async( ["JavaScript1.js", "JavaScript3.js"],
 			{
 				onload: function () {
 
