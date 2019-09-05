@@ -6,16 +6,16 @@
  *http://javascript.ru/forum/events/21439-dinamicheskaya-zagruzka-skriptov.html
  *https://learn.javascript.ru/onload-onerror
  *
- * Copyright 2011 Data Arts Team, Google Creative Lab
+ * @copyright 2011 Data Arts Team, Google Creative Lab
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * @license under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  */
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
-import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
+import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/master/index.js';
 /**
  * @callback onerror
  * @param {string} str - error details
