@@ -14,9 +14,14 @@
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  */
+
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
-//import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/master/index.js';
+
+//local version
+//import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
+
 import { sync as loadFileSync, escapeHtml } from '../../loadFileNodeJS/master/index.js';
+
 /**
  * @callback onerror
  * @param {string} str - error details
