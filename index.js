@@ -18,9 +18,9 @@
 //Please download https://github.com/anhr/loadFileNodeJS into ../loadFileNodeJS folder
 
 //local version
-//import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
+import { sync as loadFileSync, escapeHtml } from '../loadFileNodeJS/index.js';
 
-import { sync as loadFileSync, escapeHtml } from '../../loadFileNodeJS/master/index.js';
+//import { sync as loadFileSync, escapeHtml } from '../../loadFileNodeJS/master/index.js';
 
 /**
  * @callback onerror
