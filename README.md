@@ -1,4 +1,7 @@
 ﻿# loadScript
+
+**Deprecated! Please go to [loadScript](https://github.com/anhr/commonNodeJS/tree/master/loadScriptNodeJS).**
+
 The loadScript is node.js version of the load JavaScript file. [Example of using](https://raw.githack.com/anhr/loadScriptNodeJS/master/index.html)
 
 ## Packaged Builds
